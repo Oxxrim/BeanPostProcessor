@@ -1,6 +1,6 @@
 package com.internship.controller;
 
-import com.internship.service.FileService;
+import com.internship.service.FileServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,12 +12,12 @@ import java.io.IOException;
 public class FileController {
 
     @Autowired
-    private FileService fileService;
+    private FileServiceImpl fileServiceImpl;
 
     @GetMapping("/file")
     public String readTextFromFile(@RequestParam String filename) throws IOException {
 
-        String text = fileService.readFromFile(filename);
+        String text = fileServiceImpl.readFromFile(filename);
 
         return text;
     }
