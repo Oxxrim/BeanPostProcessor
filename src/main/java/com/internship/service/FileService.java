@@ -1,7 +1,6 @@
 package com.internship.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
@@ -9,7 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-@EnableAsync
+
 @Service
 public class FileService implements FileServiceImpl {
 

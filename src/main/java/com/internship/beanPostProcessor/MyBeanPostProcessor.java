@@ -38,8 +38,9 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
                 @Override
                 public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
+                    System.err.println("Name of class: " + beanClass.getName());
                     Object retVal = method.invoke(bean, args);
-                    System.err.println("Name of class: " + new Exception().getStackTrace()[2].getClassName());
+                    System.err.println("Name of class: " + beanClass.getName());
 
                     return retVal;
                 }
