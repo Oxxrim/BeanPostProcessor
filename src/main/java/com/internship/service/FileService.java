@@ -1,11 +1,14 @@
 package com.internship.service;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 
@@ -15,31 +18,15 @@ public class FileService implements FileServiceImpl {
     @Value("${path_to_file}")
     private String path;
 
-    public String readFromFile(String filename) {
+    public String readFromFile(String filename) throws IOException {
 
         String text = "";
+        File file = new File(path + filename + ".txt");
 
-        FileReader reader = null;
-        try {
-            reader = new FileReader(path + filename + ".txt");
-
-            Scanner scanner = new Scanner(reader);
-
-            while (scanner.hasNextLine()){
-                text += scanner.nextLine() + " ";
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (text.equals("")){
-            text = "File is empty!!!";
+        if (!file.exists()){
+            text = "The file does not exist";
+        } else {
+            text = FileUtils.readFileToString(file, StandardCharsets.UTF_8.name());
         }
 
         return text;
